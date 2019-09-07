@@ -1,3 +1,3 @@
 # Empire ERP
 
-Requirements: https://github.com/nomhoi/empire-erp/blob/master/requirements.md
+Requirements (in Russian): https://github.com/nomhoi/empire-erp/blob/master/requirements.md
