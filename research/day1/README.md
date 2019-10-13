@@ -150,7 +150,7 @@ def test_accounts(accounts, ledger, entries):
     print(ledger)
     print(accounts)
 ```
-Добавили новый тест __test_accounts__.
+Добавили новый тест **test_accounts**.
 
 Запускаем тест и наблюдаем вывод:
 ```bash
