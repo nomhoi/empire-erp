@@ -40,7 +40,7 @@ class GeneralLedger(list):
         return res
 ```
 
-__test_accounting.py__:
+**test_accounting.py**:
 ```python
 import pytest
 from accounting import *
@@ -118,7 +118,7 @@ class Accounts(dict):
 ```
 Класс __Accounts__ выполнен в виде словаря. В ключах номер счета, в значениях содержимое счета, т.е. экземпляр класса __Account__, который в свою очередь содержит поля начального и конечного сальдо и список транзакций имеющих отношение к этому счету. Заметим, что в этом списке суммы проводок по дебету и кредиту хранятся в одном поле, сумма по дебету положительна, сумма по кредиту отрицательна.
 
-__test_accounting.py__:
+**test_accounting.py**:
 ```python
 @pytest.fixture
 def accounts():
@@ -130,7 +130,7 @@ def ledger(accounts):
 ```
 В тестовом файле добавили фиксатор __accounts__ и поправили фиксатор __ledger__.
 
-__test_accounting.py__:
+**test_accounting.py**:
 ```python
 @pytest.mark.parametrize('entries', [
     [(1, 12, 100.00),
@@ -235,7 +235,7 @@ class GeneralLedger(list):
 ```
 В классе __GeneralLedger__ перед добавлением проводки в счета выполняем проверку. Если поднимается исключение, то проводка не попадает ни в счета, ни в главную книгу.
 
-__test_accounting.py__:
+**test_accounting.py**:
 ```python
 @pytest.mark.parametrize('entries, exception', [
     ([(12, 1, 100.00)], BalanceException('BalanceException')),
@@ -289,7 +289,7 @@ class Balance(list):
 ```
 При создании баланса просто собираем остатки со всех счетов в одну таблицу.
 
-__test_accounting.py__:
+**test_accounting.py**:
 ```python
 @pytest.fixture
 def balance(accounts):
