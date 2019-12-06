@@ -1,0 +1,5 @@
+CREATE TABLE balance (
+    account_id      smallint NOT NULL,
+    debit_amount    money DEFAULT 0.0,
+    credit_amount   money DEFAULT 0.0
+);

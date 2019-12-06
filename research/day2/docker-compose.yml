@@ -1,0 +1,24 @@
+version: "3.7"
+
+services:
+  test:
+    build: .
+    volumes:
+      - ./code:/code
+    working_dir: /code
+    depends_on:
+      - db
+    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; pytest'
+
+  db:
+    container_name: db
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=empire-erp
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./code:/code
+    working_dir: /code

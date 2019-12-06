@@ -1,0 +1,7 @@
+CREATE TYPE t_account_type AS ENUM ('active', 'passive', 'active-passive');
+
+CREATE TABLE coa (
+    account_id      smallint NOT NULL,
+    account_type    t_account_type NOT NULL,
+    name            text NOT NULL
+);
