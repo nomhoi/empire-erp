@@ -1,0 +1,3 @@
+SELECT      *
+FROM        general_ledger
+ORDER BY    general_journal_id;

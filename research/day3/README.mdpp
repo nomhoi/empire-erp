@@ -1,0 +1,194 @@
+# Empire ERP. Занимательная бухгалтерия: Аналитический учет
+
+
+## Настройка проекта
+
+Клонируем проект с гитхаба:
+```bash
+git clone https://github.com/nomhoi/empire-erp.git
+```
+
+Заходим в папку **reaserch/day3/**.
+
+Запустим базу данных и выполним тесты:
+
+```bash
+docker-compose run test
+```
+
+Подключимся к базе данных **empire-erp**:
+```bash
+docker exec -it db psql -U postgres -d empire-erp
+```
+
+## Step 1. Простые счета
+
+Счета без субсчетов называются простыми счетами. На этом шаге повторим получение оборотов по счетам с использованием главной книги.
+
+Выполним команду в командной строке **psql** для инициализации базы данных:
+```
+empire-erp=# \i step1.sql
+```
+
+Файл **step1.sql**:
+```sql
+!INCLUDE "code/step1.sql"
+```
+
+Создаем журнал проводок **general journal**. В прошлой статье ошибка, на самом деле это журнал проводок.
+
+Заполняем журнал проводок какими-нибудь исходными данными:
+```sql
+!INCLUDE "code/step1_1.cmd"
+!INCLUDE "code/step1_1.out"
+```
+Выводим содержимое журнала:
+```sql
+!INCLUDE "code/step1_2.cmd"
+!INCLUDE "code/step1_2.out"
+```
+Получаем из журнала проводок главную книгу и сохраняем ее в таблице **general_ledger**:
+```sql
+!INCLUDE "code/step1_3.cmd"
+!INCLUDE "code/step1_3.out"
+```
+Выводим содержимое главной книги:
+```sql
+!INCLUDE "code/step1_4.cmd"
+!INCLUDE "code/step1_4.out"
+```
+Обороты по счетам:
+```sql
+!INCLUDE "code/step1_5.cmd"
+!INCLUDE "code/step1_5.out"
+```
+
+
+## Step 2. Сложные счета
+
+Cчета с субсчетами называются сложными счетами. Напомню, что по нашим условиям счета 1-4 являются активными, 5-8 - активно-пассивными и 9-12 - пассивными. Введем дополнительное условие: каждый четный счет является сложным счетом.
+
+Файл **step2.sql**. Создаем журнал проводок **general journal** содержащий субсчета:
+```sql
+!INCLUDE "code/step2.sql"
+```
+
+Заполняем журнал проводок какими-нибудь исходными данными:
+```sql
+!INCLUDE "code/step2_1.cmd"
+!INCLUDE "code/step2_1.out"
+```
+Здесь мы должны помнить, что в сложных счетах субсчет не может принимать значение NULL, а в простых счетах значение субсчета всегда должно быть равным NULL . Можно, например, добавить триггер, который будет проверять этот момент.
+
+Выводим содержимое журнала:
+```sql
+!INCLUDE "code/step2_2.cmd"
+!INCLUDE "code/step2_2.out"
+```
+Получаем из журнала проводок главную книгу и сохраняем ее в таблице **general_ledger**:
+```sql
+!INCLUDE "code/step2_3.cmd"
+!INCLUDE "code/step2_3.out"
+```
+Выводим содержимое главной книги:
+```sql
+!INCLUDE "code/step2_4.cmd"
+!INCLUDE "code/step2_4.out"
+```
+Обороты по синтетическим счетам:
+```sql
+!INCLUDE "code/step2_5.cmd"
+!INCLUDE "code/step2_5.out"
+```
+Обороты по субсчетам:
+```sql
+!INCLUDE "code/step2_6.cmd"
+!INCLUDE "code/step2_6.out"
+```
+
+## Step 3. Счет материалы. Синтетический учет
+
+Сейчас ненадолго вернемся на Землю, в Россию. Будем манипулировать объектами, которые можно увидеть и потрогать. Используем счет 10 "Материалы".
+
+Файл **step3.sql**:
+```sql
+!INCLUDE "code/step3.sql"
+```
+Выполняем проводки с использованием счета 10:
+```sql
+!INCLUDE "code/step3_1.cmd"
+!INCLUDE "code/step3_1.out"
+```
+Первой проводкой получаем какие-то материалы от поставщика. Второй проводкой начисляем НДС.
+Третьей проводкой отпускаем материалы в производство.
+
+Выводим содержимое журнала:
+```sql
+!INCLUDE "code/step3_2.cmd"
+!INCLUDE "code/step3_2.out"
+```
+Получаем из журнала проводок главную книгу и сохраняем ее в таблице **general_ledger**:
+```sql
+!INCLUDE "code/step3_3.cmd"
+!INCLUDE "code/step3_3.out"
+```
+Выводим содержимое главной книги:
+```sql
+!INCLUDE "code/step3_4.cmd"
+!INCLUDE "code/step3_4.out"
+```
+Обороты по счетам:
+```sql
+!INCLUDE "code/step3_5.cmd"
+!INCLUDE "code/step3_5.out"
+```
+
+## Step 4. Счет материалы. Аналитический учет
+
+Все материалы могут храниться на складах. Добавим склады и используем субсчета.
+
+Файл **step4.sql**:
+```sql
+!INCLUDE "code/step4.sql"
+```
+
+Выполняем проводки с использованием счета 10:
+```sql
+!INCLUDE "code/step4_1.cmd"
+!INCLUDE "code/step4_1.out"
+```
+Выводим содержимое журнала:
+```sql
+!INCLUDE "code/step4_2.cmd"
+!INCLUDE "code/step4_2.out"
+```
+Получаем из журнала проводок главную книгу и сохраняем ее в таблице **general_ledger**:
+```sql
+!INCLUDE "code/step4_3.cmd"
+!INCLUDE "code/step4_3.out"
+```
+Выводим содержимое главной книги:
+```sql
+!INCLUDE "code/step4_4.cmd"
+!INCLUDE "code/step4_4.out"
+```
+Обороты по счетам:
+```sql
+!INCLUDE "code/step4_5.cmd"
+!INCLUDE "code/step4_5.out"
+```
+Обороты по субсчетам:
+```sql
+!INCLUDE "code/step4_6.cmd"
+!INCLUDE "code/step4_6.out"
+```
+Обороты по субсчетам и складам:
+```sql
+!INCLUDE "code/step4_7.cmd"
+!INCLUDE "code/step4_7.out"
+```
+Обороты только по счету 10 и складам:
+```sql
+!INCLUDE "code/step4_8.cmd"
+!INCLUDE "code/step4_8.out"
+```

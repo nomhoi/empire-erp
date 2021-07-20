@@ -1,0 +1,8 @@
+INSERT INTO general_journal(debit_id, debit_sub_id, credit_id, credit_sub_id, amount)
+VALUES  ( 1, NULL, 12,    1, 100.00),
+        ( 1, NULL, 12,    2, 140.00),
+        ( 1, NULL,  6,    1, 120.00),
+        ( 6,    2,  1, NULL,  80.00),
+        (12,    1,  1, NULL,  20.00),
+        (12,    2,  1, NULL,  40.00);
+

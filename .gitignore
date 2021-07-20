@@ -91,6 +91,7 @@ env.bak/
 venv.bak/
 .idea/
 tmp/
+*.code-workspace
 
 # Spyder project settings
 .spyderproject
@@ -104,3 +105,6 @@ tmp/
 
 # mypy
 .mypy_cache/
+
+books/
+README.md

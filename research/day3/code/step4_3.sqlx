@@ -1,0 +1,25 @@
+DROP TABLE IF EXISTS general_ledger;
+
+SELECT id                AS gj_id,
+       debit_id          AS acc_id,
+       debit_sub_id      AS acc_sub_id,
+       debit_stock_id    AS acc_stock_id,
+       credit_id         AS cor_id,
+       credit_sub_id     AS cor_sub_id,
+       credit_stock_id   AS cor_stock_id,
+       amount            AS debit_amount,
+       ( 0.00 ) :: money AS credit_amount
+INTO general_ledger
+FROM general_journal
+UNION
+SELECT id                AS gj_id,
+       credit_id         AS acc_id,
+       credit_sub_id     AS acc_sub_id,
+       credit_stock_id   AS acc_stock_id,
+       debit_id          AS cor_id,
+       debit_sub_id      AS cor_sub_id,
+       debit_stock_id    AS cor_stock_id,
+       ( 0.00 ) :: money AS debit_amount,
+       amount            AS credit_amount
+FROM general_journal
+ORDER BY gj_id;

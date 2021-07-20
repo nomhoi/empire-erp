@@ -1,0 +1,3 @@
+SELECT      *
+FROM        general_ledger
+ORDER BY    gj_id;

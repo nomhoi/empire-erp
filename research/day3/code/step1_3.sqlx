@@ -1,0 +1,17 @@
+DROP TABLE IF EXISTS general_ledger;
+
+SELECT id                AS general_journal_id,
+       debit_id          AS account_id,
+       credit_id         AS corresp_id,
+       amount            AS debit_amount,
+       ( 0.00 ) :: money AS credit_amount
+INTO general_ledger
+FROM general_journal
+UNION
+SELECT id                AS general_journal_id,
+       credit_id         AS account_id,
+       debit_id          AS corresp_id,
+       ( 0.00 ) :: money AS debit_amount,
+       amount            AS credit_amount
+FROM general_journal
+ORDER BY general_journal_id;
