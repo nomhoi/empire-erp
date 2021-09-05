@@ -1,5 +1,6 @@
 ### Empire ERP: список требований
 
+Содержание цикла статей: https://github.com/nomhoi/empire-erp.
 
 [![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/lk2-bgwA0Ro/0.jpg)](http://www.youtube.com/watch?v=lk2-bgwA0Ro)
 
