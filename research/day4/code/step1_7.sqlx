@@ -1,0 +1,88 @@
+DROP TABLE IF EXISTS turnout;
+
+CREATE TABLE turnout(
+    acc_id          smallint NOT NULL,
+    debit_turnout   money NOT NULL,
+    credit_turnout  money NOT NULL
+);
+
+INSERT INTO turnout
+SELECT      acc_id,
+            sum(
+                CASE 
+                    WHEN side = 0
+                    THEN amount
+                    ELSE (0.0)::money
+                END
+            ) AS debit_turnout,
+            sum(
+                CASE 
+                    WHEN side = 1
+                    THEN amount
+                    ELSE (0.0)::money
+                END
+            ) AS credit_turnout
+FROM        journal_10
+GROUP BY    acc_id;
+
+INSERT INTO turnout
+SELECT      acc_id,
+            sum(
+                CASE 
+                    WHEN side = 0
+                    THEN amount
+                    ELSE (0.0)::money
+                END
+            ) AS debit_turnout,
+            sum(
+                CASE 
+                    WHEN side = 1
+                    THEN amount
+                    ELSE (0.0)::money
+                END
+            ) AS credit_turnout
+FROM        journal_19
+GROUP BY    acc_id;
+
+INSERT INTO turnout
+SELECT      acc_id,
+            sum(
+                CASE 
+                    WHEN side = 0
+                    THEN amount
+                    ELSE (0.0)::money
+                END
+            ) AS debit_turnout,
+            sum(
+                CASE 
+                    WHEN side = 1
+                    THEN amount
+                    ELSE (0.0)::money
+                END
+            ) AS credit_turnout
+FROM        journal_20
+GROUP BY    acc_id;
+
+INSERT INTO turnout
+SELECT      acc_id,
+            sum(
+                CASE 
+                    WHEN side = 0
+                    THEN amount
+                    ELSE (0.0)::money
+                END
+            ) AS debit_turnout,
+            sum(
+                CASE 
+                    WHEN side = 1
+                    THEN amount
+                    ELSE (0.0)::money
+                END
+            ) AS credit_turnout
+FROM        journal_60
+GROUP BY    acc_id;
+
+SELECT      *
+FROM        turnout
+ORDER BY    acc_id;
+

@@ -1,0 +1,16 @@
+SELECT      *
+FROM        journal_10
+ORDER BY    id;
+
+SELECT      *
+FROM        journal_19
+ORDER BY    id;
+
+SELECT      *
+FROM        journal_20
+ORDER BY    id;
+
+SELECT      *
+FROM        journal_60
+ORDER BY    id;
+

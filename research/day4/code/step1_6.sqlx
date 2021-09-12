@@ -1,0 +1,29 @@
+INSERT INTO journal_10(op_id, side, acc_id, acc_sub_id, stock_id, amount)
+VALUES  (4, 0, 10, 1, 1, 100.00),
+        (5, 0, 10, 1, 1,-100.00);
+
+INSERT INTO journal_60(op_id, side, acc_id, acc_sub_id, supplier_id, amount)
+VALUES  (4, 1, 60, 1, 3, 100.00),
+        (5, 1, 60, 1, 3,-100.00);
+
+SELECT      acc_id,
+            acc_sub_id,
+            stock_id,
+            sum(
+                CASE 
+                    WHEN side = 0
+                    THEN amount
+                    ELSE (0.0)::money
+                END
+            ) AS debit_turnout,
+            sum(
+                CASE 
+                    WHEN side = 1
+                    THEN amount
+                    ELSE (0.0)::money
+                END
+            ) AS credit_turnout
+FROM        journal_10
+GROUP BY    acc_id, acc_sub_id, stock_id
+ORDER BY    acc_id, acc_sub_id, stock_id;
+

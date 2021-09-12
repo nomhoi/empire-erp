@@ -1,0 +1,81 @@
+# Empire ERP. Занимательная бухгалтерия: Аналитический учет, ч.2.
+
+Содержание цикла статей: https://github.com/nomhoi/empire-erp.
+
+Продолжаем рассмотрение аналитического учета.
+
+## Настройка проекта
+
+Клонируем проект с гитхаба:
+```bash
+git clone https://github.com/nomhoi/empire-erp.git
+```
+
+Заходим в папку **reaserch/day4/**.
+
+Запустим базу данных и выполним тесты:
+
+```bash
+docker-compose run test
+```
+
+Подключимся к базе данных **empire-erp**:
+```bash
+docker exec -it db psql -U postgres -d empire-erp
+```
+
+## Step 1. Вспомогательные журналы
+
+Выполним команду в командной строке **psql** для инициализации базы данных:
+```
+empire-erp=# \i step1.sql
+```
+
+Создадим вспомогательные журналы проводок аналитического учета.
+
+Файл **step1.sql**:
+```sql
+!INCLUDE "code/step1.sql"
+```
+
+Заполним вспомогательные журналы проводок исходными данными:
+```sql
+!INCLUDE "code/step1_1.sqlx"
+!INCLUDE "code/step1_1.out"
+```
+
+Выводим содержимое вспомогательных журналов:
+```sql
+!INCLUDE "code/step1_2.sqlx"
+!INCLUDE "code/step1_2.out"
+```
+
+Обороты по счету 10:
+```sql
+!INCLUDE "code/step1_3.sqlx"
+!INCLUDE "code/step1_3.out"
+```
+
+Обороты по счету 10 и субсчетам:
+```sql
+!INCLUDE "code/step1_4.sqlx"
+!INCLUDE "code/step1_4.out"
+```
+
+Обороты по счету 10, субсчетам и складам:
+```sql
+!INCLUDE "code/step1_5.sqlx"
+!INCLUDE "code/step1_5.out"
+```
+
+Проверим проведение сторно и получим обороты по счету 10, субсчетам и складам:
+```sql
+!INCLUDE "code/step1_6.sqlx"
+!INCLUDE "code/step1_6.out"
+```
+
+Обороты по счетам:
+```sql
+!INCLUDE "code/step1_7.sqlx"
+!INCLUDE "code/step1_7.out"
+```

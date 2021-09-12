@@ -1,0 +1,18 @@
+SELECT      acc_id,
+            sum(
+                CASE 
+                    WHEN side = 0
+                    THEN amount
+                    ELSE (0.0)::money
+                END
+            ) AS debit_turnout,
+            sum(
+                CASE 
+                    WHEN side = 1
+                    THEN amount
+                    ELSE (0.0)::money
+                END
+            ) AS credit_turnout
+FROM        journal_10
+GROUP BY    acc_id;
+
