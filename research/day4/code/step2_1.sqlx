@@ -1,0 +1,36 @@
+-- 1. Поступление материалов
+
+INSERT INTO operation(id , name)
+VALUES  (1, 'Поступление материалов');
+
+INSERT INTO ledger_10(op_id, acc_id, acc_sub_id, debit_amount, credit_amount, stock_id)
+VALUES  (1, 10, 1, 100.00, 0.00, 1),
+        (1, 10, 1, 200.00, 0.00, 2),
+        (1, 10, 2, 100.00, 0.00, 1);
+
+INSERT INTO ledger_60(op_id, acc_id, acc_sub_id, debit_amount, credit_amount, supplier_id)
+VALUES  (1, 60, 1, 0.00, 100.00, 3),
+        (1, 60, 1, 0.00, 200.00, 3),
+        (1, 60, 1, 0.00, 100.00, 3);
+
+-- 2. Начисление НДС
+
+INSERT INTO operation(id , name)
+VALUES  (2, 'Начисление НДС');
+
+INSERT INTO ledger_60(op_id, acc_id, acc_sub_id, debit_amount, credit_amount, supplier_id)
+VALUES  (2, 60, 1,  0.00, 72.00, 3);
+
+INSERT INTO ledger_19(op_id, acc_id, acc_sub_id, debit_amount, credit_amount)
+VALUES  (2, 19, 3, 72.00,  0.00);
+
+-- 3. Перевод материалов в производство
+
+INSERT INTO operation(id , name)
+VALUES  (3, 'Перевод материалов в производство');
+
+INSERT INTO ledger_10(op_id, acc_id, acc_sub_id, debit_amount, credit_amount, stock_id)
+VALUES  (3, 10, 1, 0.00, 50.00, 1);
+
+INSERT INTO ledger_20(op_id, acc_id, acc_sub_id, debit_amount, credit_amount)
+VALUES  (3, 20, 3, 50.00, 0.00);

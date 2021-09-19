@@ -1,0 +1,7 @@
+SELECT      acc_id,
+            acc_sub_id,
+            sum(debit_amount) AS debit_turnout,
+            sum(credit_amount) AS credit_turnout
+FROM        ledger_10
+GROUP BY    acc_id, acc_sub_id
+ORDER BY    acc_id, acc_sub_id;

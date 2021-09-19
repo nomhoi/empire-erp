@@ -1,0 +1,40 @@
+DROP TABLE IF EXISTS turnout;
+
+CREATE TABLE turnout(
+    acc_id          smallint NOT NULL,
+    debit_turnout   money NOT NULL,
+    credit_turnout  money NOT NULL
+);
+
+INSERT INTO turnout
+SELECT      acc_id,
+            sum(debit_amount) AS debit_turnout,
+            sum(credit_amount) AS credit_turnout
+FROM        ledger_10
+GROUP BY    acc_id;
+
+INSERT INTO turnout
+SELECT      acc_id,
+            sum(debit_amount) AS debit_turnout,
+            sum(credit_amount) AS credit_turnout
+FROM        ledger_19
+GROUP BY    acc_id;
+
+INSERT INTO turnout
+SELECT      acc_id,
+            sum(debit_amount) AS debit_turnout,
+            sum(credit_amount) AS credit_turnout
+FROM        ledger_20
+GROUP BY    acc_id;
+
+INSERT INTO turnout
+SELECT      acc_id,
+            sum(debit_amount) AS debit_turnout,
+            sum(credit_amount) AS credit_turnout
+FROM        ledger_60
+GROUP BY    acc_id;
+
+SELECT      *
+FROM        turnout
+ORDER BY    acc_id;
+

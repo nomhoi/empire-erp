@@ -79,3 +79,48 @@ empire-erp=# \i step1.sql
 !INCLUDE "code/step1_7.sqlx"
 !INCLUDE "code/step1_7.out"
 ```
+
+## Step 2. Вспомогательные книги
+
+Создадим вспомогательные книги для аналитического учета.
+
+Файл **step2.sql**:
+```sql
+!INCLUDE "code/step2.sql"
+```
+
+Заполним вспомогательные книги исходными данными:
+```sql
+!INCLUDE "code/step2_1.sqlx"
+!INCLUDE "code/step2_1.out"
+```
+
+Выводим содержимое вспомогательных книг:
+```sql
+!INCLUDE "code/step2_2.sqlx"
+!INCLUDE "code/step2_2.out"
+```
+
+Обороты по счету 10:
+```sql
+!INCLUDE "code/step2_3.sqlx"
+!INCLUDE "code/step2_3.out"
+```
+
+Обороты по счету 10 и субсчетам:
+```sql
+!INCLUDE "code/step2_4.sqlx"
+!INCLUDE "code/step2_4.out"
+```
+
+Обороты по счету 10, субсчетам и складам:
+```sql
+!INCLUDE "code/step2_5.sqlx"
+!INCLUDE "code/step2_5.out"
+```
+
+Обороты по счетам:
+```sql
+!INCLUDE "code/step2_6.sqlx"
+!INCLUDE "code/step2_6.out"
+```

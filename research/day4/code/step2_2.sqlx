@@ -1,0 +1,16 @@
+SELECT      *
+FROM        ledger_10
+ORDER BY    id;
+
+SELECT      *
+FROM        ledger_19
+ORDER BY    id;
+
+SELECT      *
+FROM        ledger_20
+ORDER BY    id;
+
+SELECT      *
+FROM        ledger_60
+ORDER BY    id;
+
